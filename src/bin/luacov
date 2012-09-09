@@ -49,14 +49,16 @@ local exclusions =
 {
    { false, "^#!" },     -- Unix hash-bang magic line
    { true, "" },         -- Empty line
+   { true, "}" },        -- Just a close-brace
    { true, "end,?" },    -- Single "end"
    { true, "else" },     -- Single "else"
    { true, "repeat" },   -- Single "repeat"
    { true, "do" },       -- Single "do"
    { true, "local%s+[%w_,%s]+" }, -- "local var1, ..., varN"
    { true, "local%s+[%w_,%s]+%s*=" }, -- "local var1, ..., varN ="
-   { true, "local%s+function%s*%([%w_,%s]*%)" }, -- "local function(arg1, ..., argN)"
-   { true, "local%s+function%s+[%w_]*%s*%([%w_,%s]*%)" }, -- "local function f (arg1, ..., argN)"
+   { true, "local%s+function%s*%([%w_,%.%s]*%)" }, -- "local function(arg1, ..., argN)"
+   { true, "local%s+function%s+[%w_]*%s*%([%w_,%.%s]*%)" }, -- "local function f (arg1, ..., argN)"
+   { true, "for.+in" } -- 'for long,arg,list in'
 }
 
 local function excluded(line)
